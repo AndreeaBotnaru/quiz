@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Find Your Perfect Career</h1>
+    <form id="quizForm">
+        <!-- Questions will be inserted here -->
+    </form>
+    <button onclick="calculateResult()">Submit Quiz</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        const questions = [
+            "Do you enjoy working with numbers and solving analytical problems?",
+            "Do you like helping people and making a positive impact on their lives?",
+            "Are you creative and enjoy expressing ideas through art, writing, or design?",
+            "Do you prefer working in a structured environment with clear rules and procedures?",
+            "Do you enjoy working outdoors or with nature?",
+            "Are you comfortable using technology and learning new software?",
+            "Do you like leading teams and making decisions?",
+            "Do you prefer working with your hands, building or fixing things?",
+            "Are you interested in understanding how things work (machines, systems, etc.)?",
+            "Do you enjoy writing, whether it’s stories, articles, or other content?",
+            "Would you enjoy a job where you travel often or work internationally?",
+            "Do you feel comfortable speaking in front of groups or presenting ideas?",
+            "Are you passionate about health, fitness, or well-being?",
+            "Do you enjoy working with children or teaching others?",
+            "Are you interested in researching or discovering new knowledge in science or technology?",
+            "Do you enjoy solving complex puzzles or strategy games?",
+            "Are you drawn to jobs where you can work independently without much supervision?",
+            "Do you like working on projects that involve creativity and new ideas?",
+            "Do you prefer working with people rather than on tasks or machines?",
+            "Are you interested in protecting the environment or working in sustainable industries?"
+        ];
+
+        const form = document.getElementById('quizForm');
+        
+        questions.forEach((question, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <p>${index + 1}. ${question}</p>
+                <input type="radio" name="q${index}" value="yes"> Yes
+                <input type="radio" name="q${index}" value="no"> No
+            `;
+            form.appendChild(questionDiv);
+        });
+
+        function calculateResult() {
+            let scoreYes = 0;
+            let scoreNo = 0;
+
+            for (let i = 0; i < questions.length; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer && answer.value === "yes") {
+                    scoreYes++;
+                } else {
+                    scoreNo++;
+                }
+            }
+
+            const resultDiv = document.getElementById('result');
+            if (scoreYes > scoreNo) {
+                resultDiv.textContent = "You seem to be suited for people-oriented or creative jobs!";
+            } else {
+                resultDiv.textContent = "You may be suited for technical, structured, or hands-on careers!";
+            }
+        }
+    </script>
+
+</body>
+</html>
